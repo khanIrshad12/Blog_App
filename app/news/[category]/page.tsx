@@ -1,21 +1,24 @@
 import Newslist from "@/app/Newslist";
 import { categories } from "@/constants";
-import fetchNews from "@/lib/FetchNews"
+import fetchNews from "@/lib/FetchNews";
 
 type Props = {
-    params:{category:Category}
-}
-
-export const NewsCategory = async({params:{category}}: Props) => {
-    const news:NewsResponse=await fetchNews(category)
+  params: { category: Category };
+};
+const NewsCategory = async ({ params: { category } }: Props) => {
+  const news: NewsResponse = await fetchNews(category);
   return (
-    <Newslist news={news} />
-  )
-}
+    <div>
+      <h1 className="headerTitle">
+        <Newslist news={news} />
+      </h1>
+    </div>
+  );
+};
 export default NewsCategory;
 
-export function generateStaticParams(){
-    return categories.map(category=>({
-        category:category
-    }))
+export function generateStaticParams() {
+  return categories.map((category) => ({
+    category: category,
+  }));
 }
